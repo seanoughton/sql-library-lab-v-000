@@ -29,13 +29,16 @@ def select_name_and_series_subgenres_of_authors
   "
   SELECT authors.name, subgenres.name FROM authors
   JOIN series ON series.author_id = authors.id
-  JOIN subgenres ON subgenres.id = series.subgenre_id 
+  JOIN subgenres ON subgenres.id = series.subgenre_id
   "
 end
 
 def select_series_title_with_most_human_characters
   "
-
+  SELECT series.title, characters.species, COUNT(characters.species) AS species_count FROM series
+  JOIN characters ON characters.series_id = series.id
+  GROUP BY characters.species
+  HAVING characters.species = 'human'
   "
 end
 
